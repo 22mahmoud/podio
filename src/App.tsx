@@ -1,5 +1,6 @@
 import React from 'react';
 import tw from 'twin.macro';
+import Navbar from './components/Navbar';
 
 const Container = tw.div`
   w-screen h-screen
@@ -10,13 +11,15 @@ const Container = tw.div`
   max-w-screen-md m-auto
 `;
 
-const App: React.FC<{}> = () => (
-  <Container>
-    Hello
-    {/* <Navbar />
+const App: React.FC<{}> = () => {
+  return (
+    <Container>
+      <Navbar />
+      {/* 
     <TracksList />
   <Player /> */}
-  </Container>
-);
+    </Container>
+  );
+};
 
 export default App;
