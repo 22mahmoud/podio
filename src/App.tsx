@@ -11,15 +11,13 @@ const Container = tw.div`
   max-w-screen-md m-auto
 `;
 
-const App: React.FC<{}> = () => {
-  return (
-    <Container>
-      <Navbar />
-      {/* 
+const App: React.FC<{}> = () => (
+  <Container>
+    <Navbar />
+    {/*
     <TracksList />
   <Player /> */}
-    </Container>
+  </Container>
   );
-};
 
 export default App;

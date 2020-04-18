@@ -10,6 +10,7 @@
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
+    "twin.macro": "^1.0.0-alpha.9",
     "typescript": "~3.7.2"
   },
   "scripts": {
@@ -51,7 +52,6 @@
     "postcss-cli": "^7.1.0",
     "prettier": "^2.0.4",
     "tailwindcss": "^1.2.0",
-    "twin.macro": "^1.0.0-alpha.9",
     "typescript-plugin-tw-template": "^1.0.2"
   }
 }
