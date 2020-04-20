@@ -6,6 +6,7 @@ import 'styled-components/macro';
 
 import { ITunesResult } from '../types/itunesResult';
 import { FiHeadphones } from 'react-icons/fi';
+import { useParams } from 'react-router-dom';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col mb-32 mt-12`};
@@ -47,12 +48,12 @@ const fetchPodcasts = async (_key: string, { term }: { term: string }) => {
   return data;
 };
 
-interface TracksListProps {
-  term: string;
-}
-
-const Podcasts: React.FC<TracksListProps> = ({ term }) => {
-  const { status, data } = useQuery(['podcasts', { term }], fetchPodcasts);
+const Podcasts: React.FC<{}> = () => {
+  const { term } = useParams<{ term: string }>();
+  const { status, data } = useQuery(
+    ['podcasts', { term: term || 'Syntax' }],
+    fetchPodcasts,
+  );
 
   if (status === 'loading') {
     return <Wrapper> Loading ... </Wrapper>;

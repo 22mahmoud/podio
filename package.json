@@ -10,6 +10,7 @@
     "react-dom": "^16.13.1",
     "react-icons": "^3.9.0",
     "react-query": "^1.2.7",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0",
     "twin.macro": "^1.0.0-alpha.9",
@@ -40,6 +41,7 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/plugin-transform-react-jsx": "^7.9.4",
+    "@types/react-router-dom": "^5.1.4",
     "@types/styled-components": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.28.0",

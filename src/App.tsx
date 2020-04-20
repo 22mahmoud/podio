@@ -1,5 +1,6 @@
 import React from 'react';
 import tw from 'twin.macro';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Player from './components/Player';
 import Podcasts from './components/Podcasts';
@@ -13,11 +14,18 @@ const Container = tw.div`
 `;
 
 const App: React.FC<{}> = () => (
-  <Container>
-    <Navbar />
-    <Podcasts term="Syntax" />
-    <Player />
-  </Container>
+  <Router>
+    <Container>
+      <Navbar />
+      <Switch>
+        <Route exact path={['/', '/search/:term']}>
+          <Podcasts />
+        </Route>
+        <Route path="*">NOT FOUND</Route>
+      </Switch>
+      <Player />
+    </Container>
+  </Router>
 );
 
 export default App;

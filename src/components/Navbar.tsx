@@ -1,6 +1,7 @@
 import React from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const Wrapper = styled.div`
   ${tw`flex justify-between`};
@@ -9,10 +10,12 @@ const Wrapper = styled.div`
   }
 `;
 
-const Logo = tw.a`
-  text-2xl uppercase font-bold 
-  hover:text-gray-500 
-  ease-in transition-all duration-100
+const Logo = styled(Link)`
+  ${tw`
+    text-2xl uppercase font-bold 
+    hover:text-gray-500 
+    ease-in transition-all duration-100
+  `};
 `;
 
 const Navbar: React.FC<{}> = () => {
@@ -23,7 +26,7 @@ const Navbar: React.FC<{}> = () => {
 
   return (
     <Wrapper>
-      <Logo href="/"> Logo </Logo>
+      <Logo to="/">Logo</Logo>
       <ul>
         <li>
           <form onSubmit={handleSearchSubmit}>
