@@ -1,9 +1,11 @@
 import React from 'react';
 import tw from 'twin.macro';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
+import 'styled-components/macro';
+
 import Navbar from './components/Navbar';
 import Player from './components/Player';
-import Podcasts from './components/Podcasts';
+import SearchResultPage from './pages/SearchResultPage';
 
 const Container = tw.div`
   bg-gray-900
@@ -11,21 +13,22 @@ const Container = tw.div`
   flex flex-col
   p-4
   max-w-screen-md m-auto
+  h-full
 `;
 
 const App: React.FC<{}> = () => (
-  <Router>
-    <Container>
-      <Navbar />
+  <Container>
+    <Navbar />
+    <div tw="flex-1 mb-32 mt-12">
       <Switch>
         <Route exact path={['/', '/search/:term']}>
-          <Podcasts />
+          <SearchResultPage />
         </Route>
         <Route path="*">NOT FOUND</Route>
       </Switch>
-      <Player />
-    </Container>
-  </Router>
+    </div>
+    <Player />
+  </Container>
 );
 
 export default App;

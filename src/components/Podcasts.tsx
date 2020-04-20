@@ -2,21 +2,21 @@ import React from 'react';
 import { useQuery } from 'react-query';
 import tw from 'twin.macro';
 import styled from 'styled-components';
+import { FiHeadphones } from 'react-icons/fi';
+import { useHistory } from 'react-router-dom';
 import 'styled-components/macro';
 
 import { ITunesResult } from '../types/itunesResult';
-import { FiHeadphones } from 'react-icons/fi';
-import { useParams, useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
-  ${tw`flex flex-col mb-32 mt-12`};
+  ${tw`h-full flex flex-col`};
 `;
 
 const PodcastCard = tw.article`
   relative
   cursor-pointer
   flex
-  m-3 
+  my-3 
   p-4
   bg-gray-800 
   rounded-md
@@ -38,6 +38,8 @@ const Image = tw.img`
 
 const Content = tw.div`pl-20 ml-3`;
 
+const Center = tw.div`m-auto`;
+
 const fetchPodcasts = async (_key: string, { term }: { term: string }) => {
   const res = await fetch(
     `https://itunes.apple.com/search?term=${term}.&media=podcast`,
@@ -47,37 +49,41 @@ const fetchPodcasts = async (_key: string, { term }: { term: string }) => {
   return data;
 };
 
-const Podcasts: React.FC<{}> = () => {
+interface PodcastsPorops {
+  term: string;
+}
+
+const Podcasts: React.FC<PodcastsPorops> = ({ term }) => {
   const history = useHistory();
-  const { term } = useParams<{ term: string }>();
-  const { status, data } = useQuery(
-    ['podcasts', { term: term || 'Syntax' }],
-    fetchPodcasts,
-  );
+  const { status, data } = useQuery(['podcasts', { term }], fetchPodcasts);
 
   if (status === 'loading') {
-    return <Wrapper> Loading ... </Wrapper>;
+    return <Center> Loading ... </Center>;
   }
 
   return (
     <Wrapper>
-      {data?.results.map(podcast => (
-        <PodcastCard
-          onClick={() => {
-            history.push(`/podcast/${podcast.collectionId}`);
-          }}
-          key={podcast.collectionId}
-        >
-          <Image src={podcast.artworkUrl100} alt={podcast.trackName} />
-          <Content>
-            <h2 tw="text-xl">{podcast.collectionName}</h2>
-            <div tw="pt-2 flex items-center">
-              <FiHeadphones tw="mr-1" />
-              <p> {podcast.trackCount} </p>
-            </div>
-          </Content>
-        </PodcastCard>
-      ))}
+      {!data?.results.length ? (
+        <Center>Not found</Center>
+      ) : (
+        data?.results.map(podcast => (
+          <PodcastCard
+            onClick={() => {
+              history.push(`/podcast/${podcast.collectionId}`);
+            }}
+            key={podcast.collectionId}
+          >
+            <Image src={podcast.artworkUrl100} alt={podcast.trackName} />
+            <Content>
+              <h2 tw="text-xl">{podcast.collectionName}</h2>
+              <div tw="pt-2 flex items-center">
+                <FiHeadphones tw="mr-1" />
+                <p> {podcast.trackCount} </p>
+              </div>
+            </Content>
+          </PodcastCard>
+        ))
+      )}
     </Wrapper>
   );
 };

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
+import { BrowserRouter as Router, BrowserRouter } from 'react-router-dom';
 import tw from 'twin.macro';
 
 import App from './App';
@@ -10,15 +11,19 @@ import './styles/index.css';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    ${tw`bg-gray-900`};
+    ${tw`h-screen w-screen bg-gray-900`};
+
+    #root {
+      ${tw`h-full w-full`};
+    }
   }
 `;
 
 const Main = () => (
-  <>
+  <Router>
     <GlobalStyle />
     <App />
-  </>
+  </Router>
 );
 
 ReactDOM.render(
