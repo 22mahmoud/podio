@@ -22,11 +22,9 @@
   "scripts": {
     "start": "run-p start:app start:lambda",
     "build": "run-p build:app build:lambda",
-    "build:css": "postcss src/styles/tailwind.css -o src/styles/index.css",
-    "watch:css": "postcss src/styles/tailwind.css -o src/styles/index.css",
-    "start:app": "yarn watch:css & react-scripts start",
+    "start:app": "react-scripts start",
     "start:lambda": "netlify-lambda serve src/lambda",
-    "build:app": "yarn build:css && react-scripts build",
+    "build:app": "react-scripts build",
     "build:lambda": "netlify-lambda build src/lambda",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -56,7 +54,6 @@
     "@types/styled-components": "^5.1.0",
     "@typescript-eslint/eslint-plugin": "^2.24.0",
     "@typescript-eslint/parser": "^2.28.0",
-    "autoprefixer": "^9.7.6",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.10.1",
@@ -67,9 +64,7 @@
     "http-proxy-middleware": "^1.0.3",
     "netlify-lambda": "^1.6.3",
     "npm-run-all": "^4.1.5",
-    "postcss-cli": "^7.1.0",
     "prettier": "^2.0.4",
-    "tailwindcss": "^1.2.0",
     "typescript-plugin-tw-template": "^1.0.2"
   }
 }

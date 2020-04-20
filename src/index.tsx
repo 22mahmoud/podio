@@ -7,7 +7,7 @@ import tw from 'twin.macro';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import './styles/index.css';
+import 'tailwindcss/dist/base.css';
 
 const GlobalStyle = createGlobalStyle`
   body {
