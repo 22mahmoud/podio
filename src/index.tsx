@@ -11,7 +11,7 @@ import './styles/index.css';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    ${tw`h-screen w-screen bg-gray-900`};
+    ${tw`h-screen bg-gray-900`};
 
     #root {
       ${tw`h-full w-full`};
