@@ -6,7 +6,7 @@ import 'styled-components/macro';
 
 import { ITunesResult } from '../types/itunesResult';
 import { FiHeadphones } from 'react-icons/fi';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   ${tw`flex flex-col mb-32 mt-12`};
@@ -44,11 +44,11 @@ const fetchPodcasts = async (_key: string, { term }: { term: string }) => {
   );
 
   const data: ITunesResult = await res.json();
-  console.log(data);
   return data;
 };
 
 const Podcasts: React.FC<{}> = () => {
+  const history = useHistory();
   const { term } = useParams<{ term: string }>();
   const { status, data } = useQuery(
     ['podcasts', { term: term || 'Syntax' }],
@@ -62,7 +62,12 @@ const Podcasts: React.FC<{}> = () => {
   return (
     <Wrapper>
       {data?.results.map(podcast => (
-        <PodcastCard key={podcast.collectionId}>
+        <PodcastCard
+          onClick={() => {
+            history.push(`/podcast/${podcast.collectionId}`);
+          }}
+          key={podcast.collectionId}
+        >
           <Image src={podcast.artworkUrl100} alt={podcast.trackName} />
           <Content>
             <h2 tw="text-xl">{podcast.collectionName}</h2>

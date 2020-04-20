@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const Wrapper = styled.div`
   ${tw`flex justify-between`};
@@ -19,9 +19,18 @@ const Logo = styled(Link)`
 `;
 
 const Navbar: React.FC<{}> = () => {
-  const handleSearchSubmit = (event: React.FormEvent) => {
+  const history = useHistory();
+  const [searchValue, setSerachValue] = useState('');
+
+  const handleSearchSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Submited');
+    history.push(`/search/${searchValue}`);
+  };
+
+  const handleSearchInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setSerachValue(event.target.value);
   };
 
   return (
@@ -31,6 +40,8 @@ const Navbar: React.FC<{}> = () => {
         <li>
           <form onSubmit={handleSearchSubmit}>
             <input
+              value={searchValue}
+              onChange={handleSearchInputChange}
               type="search"
               placeholder="search for genres, stations, or podcasts"
             />
