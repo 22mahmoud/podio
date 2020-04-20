@@ -16,5 +16,6 @@
     "jsx": "react",
     "plugins": [{ "name": "typescript-plugin-tw-template" }]
   },
+  "exclude": ["src/setupProxy.js", "src/lambda"],
   "include": ["src"]
 }
