@@ -35,7 +35,7 @@ const Navbar: React.FC<{}> = () => {
 
   return (
     <Wrapper>
-      <Logo to="/">Logo</Logo>
+      <Logo to="/">podio</Logo>
       <ul>
         <li>
           <form onSubmit={handleSearchSubmit}>

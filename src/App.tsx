@@ -6,6 +6,7 @@ import 'styled-components/macro';
 import Navbar from './components/Navbar';
 import Player from './components/Player';
 import SearchResultPage from './pages/SearchResultPage';
+import PodcastPage from './pages/PodcastPage';
 
 const Container = tw.div`
   bg-gray-900
@@ -23,6 +24,9 @@ const App: React.FC<{}> = () => (
       <Switch>
         <Route exact path={['/', '/search/:term']}>
           <SearchResultPage />
+        </Route>
+        <Route exact path="/podcast/:id">
+          <PodcastPage />
         </Route>
         <Route path="*">NOT FOUND</Route>
       </Switch>

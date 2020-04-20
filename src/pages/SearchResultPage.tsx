@@ -16,9 +16,9 @@ const SearchResultPage: React.FC<{}> = () => {
   const term = params.term || 'Syntax';
   return (
     <Wrapper>
-      <div tw="mb-4">
+      <div tw="flex flex-col mb-4">
         <h2 tw="font-light">Search Result for:</h2>
-        <p tw="block text-2xl"> {term} </p>
+        <p tw="truncate block text-2xl"> {term} </p>
       </div>
       <Podcasts term={term} />
     </Wrapper>
