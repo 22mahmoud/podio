@@ -3558,6 +3558,10 @@ video {
   flex: 1 1 0%;
 }
 
+.flex-3 {
+  flex: 0 1 calc(25% - 1em);
+}
+
 .flex-auto {
   flex: 1 1 auto;
 }
@@ -13896,6 +13900,10 @@ video {
 
   .sm\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .sm\:flex-3 {
+    flex: 0 1 calc(25% - 1em);
   }
 
   .sm\:flex-auto {
@@ -24239,6 +24247,10 @@ video {
     flex: 1 1 0%;
   }
 
+  .md\:flex-3 {
+    flex: 0 1 calc(25% - 1em);
+  }
+
   .md\:flex-auto {
     flex: 1 1 auto;
   }
@@ -34580,6 +34592,10 @@ video {
     flex: 1 1 0%;
   }
 
+  .lg\:flex-3 {
+    flex: 0 1 calc(25% - 1em);
+  }
+
   .lg\:flex-auto {
     flex: 1 1 auto;
   }
@@ -44919,6 +44935,10 @@ video {
 
   .xl\:flex-1 {
     flex: 1 1 0%;
+  }
+
+  .xl\:flex-3 {
+    flex: 0 1 calc(25% - 1em);
   }
 
   .xl\:flex-auto {

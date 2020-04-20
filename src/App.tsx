@@ -2,9 +2,9 @@ import React from 'react';
 import tw from 'twin.macro';
 import Navbar from './components/Navbar';
 import Player from './components/Player';
+import Podcasts from './components/Podcasts';
 
 const Container = tw.div`
-  w-screen h-screen
   bg-gray-900
   text-gray-200
   flex flex-col
@@ -15,9 +15,7 @@ const Container = tw.div`
 const App: React.FC<{}> = () => (
   <Container>
     <Navbar />
-    {/*
-    <TracksList />
-   */}
+    <Podcasts term="Syntax" />
     <Player />
   </Container>
 );
