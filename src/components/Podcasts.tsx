@@ -7,25 +7,14 @@ import { useHistory } from 'react-router-dom';
 import 'styled-components/macro';
 
 import { ITunesResult } from '../types/itunesResult';
+import Card from './Card';
 
 const Wrapper = styled.div`
   ${tw`h-full flex flex-col`};
 `;
 
-const PodcastCard = tw.article`
-  relative
-  cursor-pointer
-  flex
-  my-3 
-  p-4
-  bg-gray-800 
-  rounded-md
-  shadow-sm
-  transform
-  hover:scale-105
-  transition-all
-  duration-100
-  ease-in-out
+const PodcastCard = styled(Card)`
+  ${tw`my-3 p-4`}
 `;
 
 const Image = tw.img`

@@ -2,27 +2,16 @@ import React from 'react';
 import tw from 'twin.macro';
 import { useQuery } from 'react-query';
 import { useParams } from 'react-router-dom';
+import styled from 'styled-components';
 import 'styled-components/macro';
 
 import { ITunesResult } from '../types/itunesResult';
 import Episode from '../types/Podcast';
+import Card from '../components/Card';
 
 const Wrapper = tw.div`flex flex-col`;
 
-const EpisodeCard = tw.div`
-  cursor-pointer
-  flex
-  my-2 
-  p-2
-  bg-gray-800 
-  rounded-md
-  shadow-sm
-  transform
-  hover:scale-105
-  transition-all
-  duration-100
-  ease-in-out
-`;
+const EpisodeCard = styled(Card)``;
 
 const fetchPodcast = async (_key: string, { id }: { id: string }) => {
   const lookupResponse = await fetch(
