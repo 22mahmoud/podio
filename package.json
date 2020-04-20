@@ -25,18 +25,14 @@
     "start:app": "yarn watch:css & react-scripts start",
     "start:lambda": "netlify-lambda serve src/lambda",
     "build:app": "yarn build:css && react-scripts build",
-    "build:build": "netlify-lambda build src/lambda",
+    "build:lambda": "netlify-lambda build src/lambda",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "yarn eslint src --ext .js,.jsx,.ts,.tsx",
     "lint:fix": "yarn eslint src --ext .js,.jsx,.ts,.tsx --fix"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
+    "production": [">0.2%", "not dead", "not op_mini all"],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
