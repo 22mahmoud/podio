@@ -42,7 +42,7 @@ const Center = tw.div`m-auto`;
 
 const fetchPodcasts = async (_key: string, { term }: { term: string }) => {
   const res = await fetch(
-    `https://itunes.apple.com/search?term=${term}.&media=podcast`,
+    `https://cors-anywhere.herokuapp.com/https://itunes.apple.com/search?term=${term}.&media=podcast`,
   );
 
   const data: ITunesResult = await res.json();
