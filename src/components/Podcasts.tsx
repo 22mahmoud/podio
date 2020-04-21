@@ -44,7 +44,9 @@ interface PodcastsPorops {
 
 const Podcasts: React.FC<PodcastsPorops> = ({ term }) => {
   const history = useHistory();
-  const { status, data } = useQuery(['podcasts', { term }], fetchPodcasts);
+  const { status, data } = useQuery(['podcasts', { term }], fetchPodcasts, {
+    refetchOnWindowFocus: false,
+  });
 
   if (status === 'loading') {
     return <Center> Loading ... </Center>;

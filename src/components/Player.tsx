@@ -3,6 +3,7 @@ import tw from 'twin.macro';
 import styled from 'styled-components';
 import 'styled-components/macro';
 import { FiPlay, FiSkipForward, FiSkipBack } from 'react-icons/fi';
+import { usePlayerContext } from '../providers/PlayerProvider';
 
 const Wrapper = tw.div`
     bg-gray-700 
@@ -45,17 +46,21 @@ interface PlayerProps {
   src?: string;
 }
 
-const Player: React.FC<PlayerProps> = () => (
-  <>
-    <Wrapper>
-      <div tw="flex">
-        <PrevTrackButton />
-        <PlayButton />
-        <NextTrackButton />
-      </div>
-      <Progress progress={30} />
-    </Wrapper>
-  </>
-);
+const Player: React.FC<PlayerProps> = () => {
+  const { duration, currentTime } = usePlayerContext();
+  console.log(duration, currentTime, 'SEK');
+  return (
+    <>
+      <Wrapper>
+        <div tw="flex">
+          <PrevTrackButton />
+          <PlayButton />
+          <NextTrackButton />
+        </div>
+        <Progress progress={30} />
+      </Wrapper>
+    </>
+  );
+};
 
 export default Player;

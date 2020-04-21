@@ -3,11 +3,13 @@ import ReactDOM from 'react-dom';
 import { createGlobalStyle } from 'styled-components';
 import { BrowserRouter as Router } from 'react-router-dom';
 import tw from 'twin.macro';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import 'tailwindcss/dist/base.css';
 
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import 'tailwindcss/dist/base.css';
+import PlayerProvider from './providers/PlayerProvider';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -22,7 +24,9 @@ const GlobalStyle = createGlobalStyle`
 const Main = () => (
   <Router>
     <GlobalStyle />
-    <App />
+    <PlayerProvider>
+      <App />
+    </PlayerProvider>
   </Router>
 );
 
