@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import tw from 'twin.macro';
-import styled from 'styled-components';
-import 'styled-components/macro';
-import { FiPlay, FiSkipForward, FiSkipBack } from 'react-icons/fi';
+import styled from 'styled-components/macro';
+import { FiPlay, FiSkipForward, FiSkipBack, FiPause } from 'react-icons/fi';
+import { useAudioPlayer } from '../providers/audioPlayerProvider';
 
 const Wrapper = tw.div`
     bg-gray-700 
@@ -11,25 +11,21 @@ const Wrapper = tw.div`
     flex items-center flex-col lg:flex-row
 `;
 
-const Progress = styled.div<{ progress: number }>`
+const Progress = styled.div`
   ${tw`
-    h-1
+    h-5
+    cursor-pointer
     w-full
     bg-gray-600
     relative
   `};
-
-  &::after {
-    content: '';
-    width: ${props => `${props.progress}%`};
-    ${tw`
-      absolute left-0 bottom-0 top-0 
-      bg-teal-300
-    `};
-  }
 `;
 
 const PlayButton = styled(FiPlay)`
+  ${tw`cursor-pointer mb-6 lg:mb-0 mx-4 text-2xl`};
+`;
+
+const PauseButton = styled(FiPause)`
   ${tw`cursor-pointer mb-6 lg:mb-0 mx-4 text-2xl`};
 `;
 
@@ -46,15 +42,45 @@ interface PlayerProps {
 }
 
 const Player: React.FC<PlayerProps> = () => {
+  const progressBarRef = useRef<HTMLDivElement>(null);
+  const {
+    status,
+    duration,
+    togglePlayPause,
+    currentTime,
+    seek,
+  } = useAudioPlayer()!;
+  const playing = status === 'playing';
+  const position = (currentTime / duration) * 100 || 0;
+  console.log(position, duration);
+
   return (
     <>
       <Wrapper>
         <div tw="flex">
           <PrevTrackButton />
-          <PlayButton />
+          {playing ? (
+            <PauseButton onClick={togglePlayPause} />
+          ) : (
+            <PlayButton onClick={togglePlayPause} />
+          )}
           <NextTrackButton />
         </div>
-        <Progress progress={30} />
+        <Progress
+          ref={progressBarRef}
+          onClick={event => {
+            if (progressBarRef.current) {
+              const x = event.pageX - progressBarRef.current?.offsetLeft;
+              const percentage = (x / progressBarRef.current.clientWidth) * 100;
+              seek((percentage / 100) * duration);
+            }
+          }}
+        >
+          <div
+            style={{ width: `${position}%` }}
+            tw="absolute left-0 bottom-0 top-0 bg-teal-300"
+          />
+        </Progress>
       </Wrapper>
     </>
   );

@@ -10,5 +10,9 @@ module.exports = {
       },
     ],
   ],
-  plugins: ['babel-plugin-macros', '@babel/plugin-transform-react-jsx'],
+  plugins: [
+    'babel-plugin-macros',
+    '@babel/plugin-transform-react-jsx',
+    'babel-plugin-styled-components',
+  ],
 };

@@ -7,6 +7,7 @@ import tw from 'twin.macro';
 import 'tailwindcss/dist/base.css';
 
 import App from './App';
+import { AudioPlayerProvider } from './providers/audioPlayerProvider';
 import * as serviceWorker from './serviceWorker';
 
 const GlobalStyle = createGlobalStyle`
@@ -22,7 +23,9 @@ const GlobalStyle = createGlobalStyle`
 const Main = () => (
   <Router>
     <GlobalStyle />
-    <App />
+    <AudioPlayerProvider>
+      <App />
+    </AudioPlayerProvider>
   </Router>
 );
 

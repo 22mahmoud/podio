@@ -8,6 +8,7 @@ import 'styled-components/macro';
 import { ITunesResult } from '../types/itunesResult';
 import Episode from '../types/Podcast';
 import Card from '../components/Card';
+import { useAudioPlayer } from '../providers/audioPlayerProvider';
 
 const Wrapper = tw.div`flex flex-col`;
 
@@ -28,12 +29,13 @@ const fetchPodcast = async (_key: string, { id }: { id: string }) => {
 
 const PodcastPage: React.FC<{}> = () => {
   const { id } = useParams<{ id: string }>();
+  const { load } = useAudioPlayer()!;
   const { data, status } = useQuery(['podcast', { id }], fetchPodcast, {
     refetchOnWindowFocus: false,
   });
 
   const handleEpisodeClick = (episode: Episode) => (): void => {
-    // load(episode.stream as string);
+    load({ src: episode.stream as string, format: 'mp3', autoPlay: true });
   };
 
   if (status === 'loading') {
