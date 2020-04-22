@@ -9,8 +9,6 @@ import 'tailwindcss/dist/base.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import PlayerProvider from './providers/PlayerProvider';
-
 const GlobalStyle = createGlobalStyle`
   body {
     ${tw`h-screen bg-gray-900`};
@@ -24,9 +22,7 @@ const GlobalStyle = createGlobalStyle`
 const Main = () => (
   <Router>
     <GlobalStyle />
-    <PlayerProvider>
-      <App />
-    </PlayerProvider>
+    <App />
   </Router>
 );
 

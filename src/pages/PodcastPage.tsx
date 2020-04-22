@@ -8,7 +8,6 @@ import 'styled-components/macro';
 import { ITunesResult } from '../types/itunesResult';
 import Episode from '../types/Podcast';
 import Card from '../components/Card';
-import { usePlayerContext } from '../providers/PlayerProvider';
 
 const Wrapper = tw.div`flex flex-col`;
 
@@ -32,10 +31,9 @@ const PodcastPage: React.FC<{}> = () => {
   const { data, status } = useQuery(['podcast', { id }], fetchPodcast, {
     refetchOnWindowFocus: false,
   });
-  const { load } = usePlayerContext();
 
   const handleEpisodeClick = (episode: Episode) => (): void => {
-    load(episode.stream as string);
+    // load(episode.stream as string);
   };
 
   if (status === 'loading') {
