@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import tw from 'twin.macro';
 import styled from 'styled-components/macro';
-import { FiPlay, FiSkipForward, FiSkipBack, FiPause } from 'react-icons/fi';
+import { FiPlay, FiPause } from 'react-icons/fi';
 import { useAudioPlayer } from '../providers/audioPlayerProvider';
 
 const Wrapper = tw.div`
@@ -35,14 +35,6 @@ const PauseButton = styled(FiPause)`
   ${tw`cursor-pointer mb-6 lg:mb-0 mx-4 text-2xl`};
 `;
 
-const NextTrackButton = styled(FiSkipForward)`
-  ${tw`cursor-pointer mb-6 lg:mb-0 mx-4 text-2xl`};
-`;
-
-const PrevTrackButton = styled(FiSkipBack)`
-  ${tw`cursor-pointer mb-6 lg:mb-0 mx-4 text-2xl`};
-`;
-
 interface PlayerProps {
   src?: string;
 }
@@ -63,13 +55,11 @@ const Player: React.FC<PlayerProps> = () => {
     <>
       <Wrapper>
         <div tw="flex">
-          <PrevTrackButton />
           {playing ? (
             <PauseButton onClick={togglePlayPause} />
           ) : (
             <PlayButton onClick={togglePlayPause} />
           )}
-          <NextTrackButton />
         </div>
         <Progress
           {...{ position }}
