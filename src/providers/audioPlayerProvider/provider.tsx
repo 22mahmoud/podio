@@ -1,10 +1,9 @@
-import React, { useState, useReducer, useCallback } from 'react';
+import React, { useState, useReducer, useCallback, useEffect } from 'react';
 import { Howl } from 'howler';
 
 import { AudioPlayerContext } from './context';
 import { AudioPlayer, LoadOptions, Status, noop } from './types';
 import { AudioPlayerReducer, intialAudioPlayerState, Actions } from './state';
-import { useAnimationFrame } from '../useAnimationFrame';
 
 export const AudioPlayerProvider: React.FC<{}> = ({ children }) => {
   const [player, setPlayer] = useState<Howl | null>(null);
@@ -16,19 +15,16 @@ export const AudioPlayerProvider: React.FC<{}> = ({ children }) => {
 
   const { status, duration, error } = state;
 
-  useAnimationFrame(() => {
-    const res = player?.seek();
-    const isHowl = (input: any | Howl): input is Howl => {
-      // @ts-ignore
-      // eslint-disable-next-line
-      if (input?._src) return true;
-      return false;
-    };
+  useEffect(() => {
+    const node: HTMLAudioElement = (player as any)?._sounds[0]?._node;
+    const handleOnTimeUpdate = () => void setCurrentTime(node.currentTime);
 
-    if (!isHowl(res)) {
-      setCurrentTime(res as number);
-    }
-  }, [player?.seek]);
+    node?.addEventListener('timeupdate', handleOnTimeUpdate);
+
+    return () => {
+      node?.removeEventListener('timeupdate', handleOnTimeUpdate);
+    };
+  }, [player]);
 
   const load = useCallback(
     (options: LoadOptions) => {

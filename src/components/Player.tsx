@@ -11,7 +11,7 @@ const Wrapper = tw.div`
     flex items-center flex-col lg:flex-row
 `;
 
-const Progress = styled.div`
+const Progress = styled.div<{ position: number }>`
   ${tw`
     h-5
     cursor-pointer
@@ -19,6 +19,12 @@ const Progress = styled.div`
     bg-gray-600
     relative
   `};
+
+  &::after {
+    content: '';
+    width: ${props => `${props.position || 0}%`};
+    ${tw`transition-all duration-200 ease-in absolute left-0 bottom-0 top-0 bg-teal-300`}
+  }
 `;
 
 const PlayButton = styled(FiPlay)`
@@ -52,7 +58,6 @@ const Player: React.FC<PlayerProps> = () => {
   } = useAudioPlayer()!;
   const playing = status === 'playing';
   const position = (currentTime / duration) * 100 || 0;
-  console.log(position, duration);
 
   return (
     <>
@@ -67,6 +72,7 @@ const Player: React.FC<PlayerProps> = () => {
           <NextTrackButton />
         </div>
         <Progress
+          {...{ position }}
           ref={progressBarRef}
           onClick={event => {
             if (progressBarRef.current) {
@@ -75,12 +81,7 @@ const Player: React.FC<PlayerProps> = () => {
               seek((percentage / 100) * duration);
             }
           }}
-        >
-          <div
-            style={{ width: `${position}%` }}
-            tw="absolute left-0 bottom-0 top-0 bg-teal-300"
-          />
-        </Progress>
+        />
       </Wrapper>
     </>
   );
